@@ -601,6 +601,103 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                               isHeight: true,
                               isWidth: false,
                               height: height * 0.02),
+                          Text("Services",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          context.read<EstateBloc>().services.isEmpty
+                              ? Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  child: Center(
+                                      child: Text("There is no service")))
+                              : Column(
+                                  children: context
+                                      .read<EstateBloc>()
+                                      .services
+                                      .map((service) => Card(
+                                          elevation: 3,
+                                          color: Color(0xFFFFFFFF),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 5),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Row(children: [
+                                                  CircleAvatar(
+                                                      foregroundImage: NetworkImage(
+                                                          "https://static.thenounproject.com/png/1389879-200.png"),
+                                                      radius: 20),
+                                                  SizedBox(width: 20),
+                                                  Expanded(
+                                                    child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              "Service: ${service.name}",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      18)),
+                                                          Text(
+                                                              "Price: \$${service.price}",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      16)),
+                                                        ]),
+                                                  ),
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        bool isLoading = false;
+                                                        await showDialog(
+                                                            context: context,
+                                                            builder: (_) =>
+                                                                StatefulBuilder(
+                                                                    builder:
+                                                                        (context,
+                                                                            setState) {
+                                                                  return AlertDialog(
+                                                                      title: Text(
+                                                                          "Buy ${service.name} service"),
+                                                                      content: Text(
+                                                                          "Are you sure to buy this service"),
+                                                                      actions: [
+                                                                        if (isLoading)
+                                                                          Center(
+                                                                              child: CircularProgressIndicator()),
+                                                                        if (!isLoading)
+                                                                          TextButton(
+                                                                              child: Text("Cancel"),
+                                                                              onPressed: () {
+                                                                                Navigator.of(context).pop();
+                                                                              }),
+                                                                        if (!isLoading)
+                                                                          TextButton(
+                                                                              child: Text("Buy"),
+                                                                              onPressed: () async {
+                                                                                setState(() {
+                                                                                  isLoading = true;
+                                                                                });
+                                                                                await buyService(widget.id, service.id);
+                                                                                if (context.mounted) {
+                                                                                  Navigator.of(context).pop();
+                                                                                }
+                                                                              }),
+                                                                      ]);
+                                                                }));
+                                                      },
+                                                      child: Text("buy"))
+                                                ]),
+                                              ],
+                                            ),
+                                          )))
+                                      .toList()),
+                          SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -717,81 +814,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                   children: state.estate.comments
                                       .map((comment) => CommentCard(
                                           id: comment["id"],
+                                          userId: comment["user_id"],
                                           commentId: comment["comment_id"],
                                           estateId: comment["estate_id"],
                                           comment: comment["comment"],
                                           name: comment["user_name"],
                                           email: comment["email"],
-                                          onAddPressed: () async {
-                                            bool isLoading = false;
-                                            String comment1 = "";
-                                            await showDialog(
-                                                context: context,
-                                                builder:
-                                                    (_) => StatefulBuilder(
-                                                            builder: (context,
-                                                                setState) {
-                                                          return AlertDialog(
-                                                              title: Text(
-                                                                  "Comment on this ${comment["user_name"]}"),
-                                                              content:
-                                                                  TextField(
-                                                                maxLines: null,
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "write a comment",
-                                                                ),
-                                                                onChanged:
-                                                                    (value) {
-                                                                  comment1 =
-                                                                      value;
-                                                                },
-                                                              ),
-                                                              actions: [
-                                                                if (isLoading)
-                                                                  Center(
-                                                                      child:
-                                                                          CircularProgressIndicator()),
-                                                                if (!isLoading)
-                                                                  TextButton(
-                                                                      child: Text(
-                                                                          "Cancel"),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      }),
-                                                                if (!isLoading)
-                                                                  TextButton(
-                                                                      child: Text(
-                                                                          "Send"),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        if (comment1 ==
-                                                                            "")
-                                                                          return;
-                                                                        setState(
-                                                                            () {
-                                                                          isLoading =
-                                                                              true;
-                                                                        });
-                                                                        await commentEstate(
-                                                                            widget.id,
-                                                                            comment["id"],
-                                                                            comment1);
-                                                                        if (context
-                                                                            .mounted) {
-                                                                          context
-                                                                              .read<EstateBloc>()
-                                                                              .add(GetOneEstate(id: widget.id));
-                                                                          Navigator.of(context)
-                                                                              .pop();
-                                                                        }
-                                                                      }),
-                                                              ]);
-                                                        }));
-                                          },
                                           replies: comment["comments"]))
                                       .toList()),
                         ],
@@ -833,28 +861,31 @@ Future<void> rateEstate(int id, int rating) async {
   }
 }
 
-Future<void> commentEstate(int id, int? commentId, String comment) async {
-  var headers = {
-    'Authorization': Constant.token!,
-    "Content-Type": "application/json"
-  };
-  http.Response response = await http.post(
-      Uri.parse('${Constant.baseUrl}/comment'),
-      body: jsonEncode(
-          {"estate_id": id, "comment": comment, "comment_id": commentId}),
-      headers: headers);
-  print(response.statusCode);
-  if (response.statusCode == 200 || response.statusCode == 201) {
-    Fluttertoast.showToast(msg: "Commented successfully");
-  } else {
-    Fluttertoast.showToast(msg: "Unexpected Error");
-  }
-}
-
 bool isFavorite(int id) {
   for (final json in Constant.favoriteEstates) {
     if (id == json["id"]) return true;
   }
 
   return false;
+}
+
+Future<void> buyService(int estateId, int serviceId) async {
+  var headers = {
+    'Authorization': Constant.token!,
+    "Content-Type": "application/json"
+  };
+  http.Response response = await http.post(
+      Uri.parse('${Constant.baseUrl}/payment'),
+      body: jsonEncode({"service_id": serviceId, "estate_id": estateId}),
+      headers: headers);
+  print(response.statusCode);
+  if (response.statusCode == 200 ||
+      response.statusCode == 201 ||
+      response.statusCode == 204) {
+    Fluttertoast.showToast(msg: "Buy successfully");
+  } else if (response.statusCode == 402) {
+    Fluttertoast.showToast(msg: jsonDecode(response.body)["error"]);
+  } else {
+    Fluttertoast.showToast(msg: "Unexpected Error");
+  }
 }

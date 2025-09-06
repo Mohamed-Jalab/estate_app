@@ -40,9 +40,21 @@ class _AccountProfileScreenState extends State<AccountProfileScreen> {
               children: [
                 Center(
                     child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage:
-                            NetworkImage("https://i.pravatar.cc/150?img=3"))),
+                  radius: 50,
+                  child: Image(
+                    image: NetworkImage("https://i.pravatar.cc/150?img=3"),
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[200],
+                        child: const Icon(
+                          Icons.image_not_supported,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                      );
+                    },
+                  ),
+                )),
                 Positioned(
                   bottom: 0,
                   right: 0,

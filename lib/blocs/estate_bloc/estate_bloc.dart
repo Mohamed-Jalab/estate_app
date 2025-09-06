@@ -6,12 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/estate_model.dart';
+import '../../models/service_model.dart';
 
 part 'estate_event.dart';
 part 'estate_state.dart';
 
 class EstateBloc extends Bloc<EstateEvent, EstateState> {
   List<EstateModel> estates = [];
+  List<ServiceModel> services = [];
   num maxPrice = 2000;
   num minPrice = 100;
   num maxArea = 100;
@@ -24,6 +26,16 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
       emit(EstateLoading());
       try {
         print(Constant.token!);
+        http.Response res2 = await http.get(
+            Uri.parse("${Constant.baseUrl}/service"),
+            headers: {"Authorization": Constant.token!});
+        if (res2.statusCode == 200) {
+          List body = jsonDecode(res2.body)["data"];
+          services = [];
+          for (final json in body) services.add(ServiceModel.fromJson(json));
+        } else {
+          throw "";
+        }
         http.Response res = await http.get(
             Uri.parse("${Constant.baseUrl}/estate"),
             headers: {"Authorization": Constant.token!});
@@ -86,6 +98,7 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
                   estate.comments.add({
                     "id": comment["id"],
                     "comment_id": comment["comment_id"],
+                    "user_id": comment["user_id"],
                     "estate_id": comment["estate_id"],
                     "comment": comment["comment"],
                     "user_name": comment["user"]["name"],
@@ -96,7 +109,9 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
                   for (int i = 0; i < estate.comments.length; i++) {
                     if (estate.comments[i]["id"] == comment["comment_id"]) {
                       estate.comments[i]["comments"].add({
+                        "id": comment["id"],
                         "comment_id": comment["comment_id"],
+                        "user_id": comment["user_id"],
                         "comment": comment["comment"],
                         "user_name": comment["user"]["name"],
                         "email": comment["user"]["email"],
@@ -122,3 +137,23 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
     });
   }
 }
+
+
+// {
+//     "id": 4,
+//     "comment_id": null,
+//     "user_id": 9,
+//     "estate_id": 21,
+//     "comment": "nice pdffddfdflace",
+//     "created_at": "2025-09-06T15:50:45.000000Z",
+//     "user": {
+//         "id": 9,
+//         "name": "Mohammed",
+//         "email": "moh123@gmail.com",
+//         "photo": null,
+//         "location": null,
+//         "location_text": null,
+//         "is_active": true,
+//         "phone": "0954802408"
+//     }
+// }
