@@ -265,6 +265,8 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS-nS14Fm9zhEQegRDRIkYUlhivdaJDNUeg&s",
                                 price:
                                     filteredProperties[index].price.toString(),
+                                listingType:
+                                    filteredProperties[index].listingType,
                                 description:
                                     filteredProperties[index].description,
                                 isBig: false,
@@ -298,6 +300,8 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                                       .toString(),
                                   description:
                                       filteredProperties[index].description,
+                                  listingType:
+                                      filteredProperties[index].listingType,
                                   isBig: false,
                                   isNetwork: true,
                                 ),

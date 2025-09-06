@@ -27,7 +27,7 @@ class PropertyDetailsPage extends StatefulWidget {
   final bool isNetwork;
   final String sallerName;
   final String sallerPhone;
-  final String propertyType;
+  final String listingType;
   final bool local;
 
   const PropertyDetailsPage({
@@ -43,7 +43,7 @@ class PropertyDetailsPage extends StatefulWidget {
     required this.bathrooms,
     required this.sallerName,
     required this.sallerPhone,
-    required this.propertyType,
+    required this.listingType,
     required this.rating,
     this.isNetwork = false,
     required this.id,
@@ -153,13 +153,13 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: widget.propertyType == 'rent'
+                            color: widget.listingType == 'rent'
                                 ? Colors.orange
                                 : Colors.green,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            widget.propertyType == 'rent'
+                            widget.listingType == 'rent'
                                 ? 'For Rent'
                                 : 'For Sale',
                             style: const TextStyle(
@@ -450,13 +450,13 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: widget.propertyType == 'rent'
+                                  color: widget.listingType == 'rent'
                                       ? Colors.orange
                                       : Colors.green,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  widget.propertyType == 'rent'
+                                  widget.listingType == 'rent'
                                       ? 'For Rent'
                                       : 'For Sale',
                                   style: const TextStyle(

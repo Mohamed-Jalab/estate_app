@@ -7,6 +7,8 @@ import '../../screens/property/property_details_page.dart';
 
 class FeaturedCard extends StatelessWidget {
   final String path, category, title, location, payment;
+  final String description, sallerName, sallerPhone, listingType;
+  final int area, bedrooms, bathroom;
   final num price, rating;
   const FeaturedCard(
       {super.key,
@@ -16,7 +18,14 @@ class FeaturedCard extends StatelessWidget {
       required this.rating,
       required this.location,
       required this.price,
-      required this.payment});
+      required this.payment,
+      required this.description,
+      required this.sallerName,
+      required this.sallerPhone,
+      required this.listingType,
+      required this.area,
+      required this.bedrooms,
+      required this.bathroom});
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +40,18 @@ class FeaturedCard extends StatelessWidget {
                   id: 0,
                   title: title,
                   local: true,
-                  description:
-                      "A minimalist architectural masterpiece with clean lines, floor-to-ceiling windows, and smart home technology.",
+                  description: description,
                   imageUrl: path,
                   location: location,
                   price: price.toString(),
                   isNetwork: false,
-                  area: 600,
-                  bedrooms: 3,
-                  bathrooms: 2,
+                  area: area.toDouble(),
+                  bedrooms: bedrooms,
+                  bathrooms: bathroom,
                   rating: rating.toDouble(),
-                  sallerName: "Ahmad Ali",
+                  sallerName: sallerName,
                   sallerPhone: "+963-99-999-9999",
-                  propertyType: "rent or sale",
+                  listingType: "rent",
                 )));
       },
       child: Container(

@@ -6,13 +6,13 @@ class EstateModel {
   String description;
   num price;
   String address;
-  double lat;
-  double lon;
+  num lat;
+  num lon;
   num area;
   String listingType;
   String estateType;
   String status;
-  int roomsCount;
+  String? roomsCount;
   num rateAvg;
   String? username;
   String? phone;
@@ -51,7 +51,7 @@ class EstateModel {
         listingType: json["listing_type"],
         estateType: json["estate_type"],
         status: json["status"],
-        roomsCount: json["other_data"]["rooms_count"],
+        roomsCount: json["other_data"]["rooms_count"].toString(),
         rateAvg: json["rate_avg"],
         username: json["user"]?["name"],
         phone: json["user"]?["phone"],

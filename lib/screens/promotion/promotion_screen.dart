@@ -145,6 +145,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                           imageUrl: property['image'],
                           price: property['price'],
                           description: property['description'],
+                          listingType: property['listing_type'],
                           isBig: false,
                           isNetwork: false,
                         );
@@ -165,6 +166,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
                             imageUrl: property['image'],
                             price: property['price'],
                             description: property['description'],
+                            listingType: property['listing_type'],
                             isBig: true,
                             isNetwork: false,
                           ),

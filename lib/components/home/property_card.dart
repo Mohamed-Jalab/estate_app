@@ -18,7 +18,7 @@ class PropertyCard extends StatelessWidget {
   final double rating;
   final String sallerName;
   final String sallerPhone;
-
+  final String listingType;
   const PropertyCard({
     Key? key,
     required this.title,
@@ -29,6 +29,7 @@ class PropertyCard extends StatelessWidget {
     required this.isBig,
     required this.isNetwork,
     required this.area,
+    required this.listingType,
     this.bedrooms = 3,
     this.bathrooms = 2,
     required this.rating,
@@ -61,7 +62,7 @@ class PropertyCard extends StatelessWidget {
               rating: rating,
               sallerName: sallerName,
               sallerPhone: sallerPhone,
-              propertyType: "rent or sale",
+              listingType: listingType,
             ),
           ),
         );

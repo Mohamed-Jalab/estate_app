@@ -14,7 +14,7 @@ part 'estate_state.dart';
 class EstateBloc extends Bloc<EstateEvent, EstateState> {
   List<EstateModel> estates = [];
   List<ServiceModel> services = [];
-  num maxPrice = 2000;
+  num maxPrice = 100000;
   num minPrice = 100;
   num maxArea = 100;
   num minArea = 5;
@@ -44,8 +44,8 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
           estates = [];
           List body = jsonDecode(res.body)["data"];
           for (final json in body) {
-            maxPrice = max(maxPrice, json["price"]);
-            minPrice = min(minPrice, json["price"]);
+            // maxPrice = max(maxPrice, json["price"]);
+            // minPrice = min(minPrice, json["price"]);
             maxArea = max(maxArea, json["area"]);
             minArea = min(minArea, json["area"]);
             if (!addresses.contains(json["address"]) &&
