@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:estate2/components/app_button.dart';
 import 'package:estate2/components/gap.dart';
 import 'package:estate2/constant/colors.dart';
 import 'package:estate2/utils/route_name.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -12,13 +12,13 @@ class OnboardView extends StatelessWidget {
   final bool isLastPage;
 
   const OnboardView({
-    Key? key,
+    super.key,
     this.isLastPage = false,
     required this.controller,
     required this.title,
     required this.subtitle,
     required this.path,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +56,10 @@ class OnboardView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
               title,
-              style:
-                  Theme.of(context).textTheme.displaySmall!.copyWith(height: 1.4),
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall!
+                  .copyWith(height: 1.4),
             ),
           ),
           const Gap(
@@ -82,7 +84,7 @@ class OnboardView extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               image: DecorationImage(

@@ -16,6 +16,7 @@ class EstateModel {
   num rateAvg;
   String? username;
   String? phone;
+  List<Map<String, dynamic>> comments;
   EstateModel(
       {required this.id,
       required this.userId,
@@ -32,9 +33,11 @@ class EstateModel {
       required this.status,
       required this.roomsCount,
       required this.rateAvg,
+      required this.comments,
       this.username,
       this.phone});
   factory EstateModel.fromJson(Map<String, dynamic> json) => EstateModel(
+        comments: [],
         id: json["id"],
         userId: json["user_id"],
         title: json["title"],

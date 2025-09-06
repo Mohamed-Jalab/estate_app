@@ -54,11 +54,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           headers: {
             "Content-Type": "application/json",
             "Authorization":
-            "Bearer 4|AcOAJOIrumJe87N1Z2bmtj56anbBhEJrOehAxlCpf7419185"
+                "Bearer 4|AcOAJOIrumJe87N1Z2bmtj56anbBhEJrOehAxlCpf7419185"
           },
-          body:
-          jsonEncode({"email": event.email, "password": event.password}));
+          body: jsonEncode({"email": event.email, "password": event.password}));
       print(res.statusCode);
+      if (res.statusCode == 302) {
+        emit(AuthFailure(message: "Unknown Server Error"));
+      }
       Map<String, dynamic> body = jsonDecode(res.body);
       if (res.statusCode == 200 || res.statusCode == 201) {
         print(body["data"]["user"]);
@@ -76,7 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (body["error"] != null) {
         emit(AuthFailure(message: body["error"]));
       } else {
-        throw res.statusCode;
+        emit(AuthFailure(message: "Unknown Error"));
       }
     });
     on<RegisterEvent>((event, emit) async {
@@ -85,10 +87,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           headers: {
             "Content-Type": "application/json",
             "Authorization":
-            "Bearer 4|AcOAJOIrumJe87N1Z2bmtj56anbBhEJrOehAxlCpf7419185"
+                "Bearer 4|AcOAJOIrumJe87N1Z2bmtj56anbBhEJrOehAxlCpf7419185"
           },
-          body:
-          jsonEncode({"email": event.email, "password": event.password, "phone": event.phone, "name": event.name,}));
+          body: jsonEncode({
+            "email": event.email,
+            "password": event.password,
+            "phone": event.phone,
+            "name": event.name,
+          }));
       print(res.statusCode);
       Map<String, dynamic> body = jsonDecode(res.body);
       if (res.statusCode == 200 || res.statusCode == 201) {

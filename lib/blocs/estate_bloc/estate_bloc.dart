@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:estate2/constant/constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+
 import '../../models/estate_model.dart';
 
 part 'estate_event.dart';
@@ -75,7 +76,41 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
         if (res.statusCode == 200) {
           EstateModel estate =
               EstateModel.fromJson(jsonDecode(res.body)["data"]);
-
+          http.Response res2 = await http.get(
+              Uri.parse("${Constant.baseUrl}/comment?estate_id=${estate.id}"),
+              headers: {"Authorization": Constant.token!});
+          if (res.statusCode == 200) {
+            for (final comment in jsonDecode(res2.body)["data"]) {
+              if (comment["estate_id"] == event.id) {
+                if (comment["comment_id"] == null) {
+                  estate.comments.add({
+                    "id": comment["id"],
+                    "comment_id": comment["comment_id"],
+                    "estate_id": comment["estate_id"],
+                    "comment": comment["comment"],
+                    "user_name": comment["user"]["name"],
+                    "email": comment["user"]["email"],
+                    "comments": []
+                  });
+                } else {
+                  for (int i = 0; i < estate.comments.length; i++) {
+                    if (estate.comments[i]["id"] == comment["comment_id"]) {
+                      estate.comments[i]["comments"].add({
+                        "comment_id": comment["comment_id"],
+                        "comment": comment["comment"],
+                        "user_name": comment["user"]["name"],
+                        "email": comment["user"]["email"],
+                      });
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+            print(estate.comments);
+          } else {
+            throw "";
+          }
           emit(EstateOneSuccess(estate: estate));
         } else {
           throw "";
