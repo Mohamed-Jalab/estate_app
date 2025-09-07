@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<EstateModel> filteredEstates = bloc.estates.where((estate) {
       final List<String> types = [];
       for (int i = 0; i < bloc.estateTypes.length; i++)
-        if (selectedTypes[i]) types.add(bloc.estateTypes[i]);
+        if (selectedTypes.isNotEmpty&&selectedTypes[i]) types.add(bloc.estateTypes[i]);
 
       return types.contains(estate.estateType);
     }).toList();
@@ -242,84 +242,84 @@ class _HomeScreenState extends State<HomeScreen> {
                                 isWidth: false,
                                 isHeight: true,
                                 height: smallGapH),
-                            RowTitleHome(
-                                title: "Featured Estates",
-                                subtitle: "view all",
-                                onPress: () {}),
-                            Gap(
-                                isWidth: false,
-                                isHeight: true,
-                                height: smallGapH),
+                            // RowTitleHome(
+                            //     title: "Featured Estates",
+                            //     subtitle: "view all",
+                            //     onPress: () {}),
+                            // Gap(
+                            //     isWidth: false,
+                            //     isHeight: true,
+                            //     height: smallGapH),
                             //! Estates
-                            SizedBox(
-                              height: height / 4,
-                              width: double.infinity,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  const FeaturedCard(
-                                    sallerName: "Mohammed",
-                                    listingType: "rent",
-                                    sallerPhone: "+963-966-545-878",
-                                    area: 70,
-                                    bedrooms: 1,
-                                    description:
-                                        "An awesome villa with luxury rooms",
-                                    bathroom: 1,
-                                    price: 65000,
-                                    path: "lib/assets/images/property2.jpg",
-                                    category: "Appartment",
-                                    title: "Aura\nApartment",
-                                    rating: 4.5,
-                                    location: "Pabna, Bangladesh",
-                                    payment: "10",
-                                  ),
-                                  Gap(
-                                    isWidth: true,
-                                    isHeight: false,
-                                    width: mediumGapW,
-                                  ),
-                                  const FeaturedCard(
-                                    sallerName: "Samer",
-                                    listingType: "sale",
-                                    sallerPhone: "+963-999-545-111",
-                                    area: 170,
-                                    bedrooms: 3,
-                                    description:
-                                        "A minimalist architectural masterpiece with clean lines, floor-to-ceiling windows, and smart home technology.",
-                                    bathroom: 2,
-                                    price: 60000,
-                                    path: "lib/assets/images/property1.jpg",
-                                    category: "Appartment",
-                                    title: "The Nexus\nApartment",
-                                    rating: 4.9,
-                                    location: "Germany, Munich",
-                                    payment: "10",
-                                  ),
-                                  Gap(
-                                      isWidth: true,
-                                      isHeight: false,
-                                      width: mediumGapW),
-                                  const FeaturedCard(
-                                    sallerName: "Salah",
-                                    listingType: "rent",
-                                    sallerPhone: "+963-999-888-111",
-                                    area: 200,
-                                    bedrooms: 4,
-                                    description:
-                                        "A minimalist architectural masterpiece with clean lines, floor-to-ceiling windows, and smart home technology.",
-                                    bathroom: 3,
-                                    path: "lib/assets/images/property.jpg",
-                                    category: "Appartment",
-                                    title: "Monolith Manor\nApartment",
-                                    rating: 4.6,
-                                    price: 90000,
-                                    location: "USA, Los Angels",
-                                    payment: "10",
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // SizedBox(
+                            //   height: height / 4,
+                            //   width: double.infinity,
+                            //   child: ListView(
+                            //     scrollDirection: Axis.horizontal,
+                            //     children: [
+                            //       const FeaturedCard(
+                            //         sallerName: "Mohammed",
+                            //         listingType: "rent",
+                            //         sallerPhone: "+963-966-545-878",
+                            //         area: 70,
+                            //         bedrooms: 1,
+                            //         description:
+                            //             "An awesome villa with luxury rooms",
+                            //         bathroom: 1,
+                            //         price: 65000,
+                            //         path: "lib/assets/images/property2.jpg",
+                            //         category: "Appartment",
+                            //         title: "Aura\nApartment",
+                            //         rating: 4.5,
+                            //         location: "Pabna, Bangladesh",
+                            //         payment: "10",
+                            //       ),
+                            //       Gap(
+                            //         isWidth: true,
+                            //         isHeight: false,
+                            //         width: mediumGapW,
+                            //       ),
+                            //       const FeaturedCard(
+                            //         sallerName: "Samer",
+                            //         listingType: "sale",
+                            //         sallerPhone: "+963-999-545-111",
+                            //         area: 170,
+                            //         bedrooms: 3,
+                            //         description:
+                            //             "A minimalist architectural masterpiece with clean lines, floor-to-ceiling windows, and smart home technology.",
+                            //         bathroom: 2,
+                            //         price: 60000,
+                            //         path: "lib/assets/images/property1.jpg",
+                            //         category: "Appartment",
+                            //         title: "The Nexus\nApartment",
+                            //         rating: 4.9,
+                            //         location: "Germany, Munich",
+                            //         payment: "10",
+                            //       ),
+                            //       Gap(
+                            //           isWidth: true,
+                            //           isHeight: false,
+                            //           width: mediumGapW),
+                            //       const FeaturedCard(
+                            //         sallerName: "Salah",
+                            //         listingType: "rent",
+                            //         sallerPhone: "+963-999-888-111",
+                            //         area: 200,
+                            //         bedrooms: 4,
+                            //         description:
+                            //             "A minimalist architectural masterpiece with clean lines, floor-to-ceiling windows, and smart home technology.",
+                            //         bathroom: 3,
+                            //         path: "lib/assets/images/property.jpg",
+                            //         category: "Appartment",
+                            //         title: "Monolith Manor\nApartment",
+                            //         rating: 4.6,
+                            //         price: 90000,
+                            //         location: "USA, Los Angels",
+                            //         payment: "10",
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Gap(
                                 isWidth: false,
                                 isHeight: true,

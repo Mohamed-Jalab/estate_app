@@ -236,9 +236,11 @@ class _AddEstateState extends State<AddEstate> {
       isLoading = true;
     });
     http.MultipartRequest request =
-        http.MultipartRequest('POST', Uri.parse('${Constant.baseUrl}/estate'));
+        http.MultipartRequest('POST', Uri.parse('${Constant.baseUrl}/estate'))..followRedirects = false;
 
-    request.headers.addAll({'Authorization': Constant.token!});
+    request.headers['Authorization'] = 'Bearer ${Constant.token!}';
+    request.headers['Content-Type'] = 'application/json';
+
     print({
       'title': title!,
       'description': description!,

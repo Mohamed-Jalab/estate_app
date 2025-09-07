@@ -61,29 +61,29 @@ class HomeHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            InkWell(
-              onTap: () {
-                PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
-                  context,
-                  settings: RouteSettings(name: RoutesName.promotionScreen),
-                  screen: PermissionScreen(),
-                  withNavBar: false,
-                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                );
-              },
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: AppColors.primaryColor)),
-                child: const Center(
-                  child: Icon(Icons.notifications),
-                ),
-              ),
-            ),
-            Gap(isWidth: true, isHeight: false, width: width * 0.03),
-            const LocationBottomSheet(),
+            // InkWell(
+            //   onTap: () {
+            //     PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+            //       context,
+            //       settings: RouteSettings(name: RoutesName.promotionScreen),
+            //       screen: PermissionScreen(),
+            //       withNavBar: false,
+            //       pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            //     );
+            //   },
+            //   child: Container(
+            //     width: 50,
+            //     height: 50,
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(30),
+            //         border: Border.all(color: AppColors.primaryColor)),
+            //     child: const Center(
+            //       child: Icon(Icons.notifications),
+            //     ),
+            //   ),
+            // ),
+            // Gap(isWidth: true, isHeight: false, width: width * 0.03),
+            // const LocationBottomSheet(),
           ],
         )
       ],

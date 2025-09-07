@@ -70,10 +70,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
           backgroundColor: AppColors.primaryColor,
           title: Text(
             "Property Details",
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: AppColors.whiteColor),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.whiteColor),
           ),
           iconTheme: const IconThemeData(color: AppColors.whiteColor),
           actions: [],
@@ -87,51 +84,35 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                 width: width,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: widget.isNetwork
-                        ? NetworkImage(widget.imageUrl)
-                        : AssetImage(widget.imageUrl) as ImageProvider,
+                    image: widget.isNetwork ? NetworkImage(widget.imageUrl) : AssetImage(widget.imageUrl) as ImageProvider,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(fontWeight: FontWeight.bold)),
+                    Text(widget.title, style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold)),
                     Gap(isHeight: true, isWidth: false, height: height * 0.01),
                     Row(
                       children: [
-                        const Icon(Icons.location_on,
-                            size: 18, color: Colors.grey),
+                        const Icon(Icons.location_on, size: 18, color: Colors.grey),
                         const SizedBox(width: 4),
                         Expanded(
-                          child: Text(widget.location,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: Colors.grey[600])),
+                          child: Text(widget.location, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey[600])),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.map,
-                              color: AppColors.primaryColor),
+                          icon: const Icon(Icons.map, color: AppColors.primaryColor),
                           onPressed: () async {
-                            final encodedLocation =
-                                Uri.encodeComponent(widget.location);
-                            final mapUrl =
-                                'https://www.google.com/maps/search/?api=1&query=$encodedLocation';
+                            final encodedLocation = Uri.encodeComponent(widget.location);
+                            final mapUrl = 'https://www.google.com/maps/search/?api=1&query=$encodedLocation';
                             if (await canLaunchUrl(Uri.parse(mapUrl))) {
                               await launchUrl(Uri.parse(mapUrl));
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Could not open map")),
+                                const SnackBar(content: Text("Could not open map")),
                               );
                             }
                           },
@@ -142,26 +123,16 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                     Row(
                       children: [
                         Text("\$${widget.price}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                    color: AppColors.primaryColor,
-                                    fontWeight: FontWeight.bold)),
+                            style: Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.bold)),
                         const SizedBox(width: 12),
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: widget.listingType == 'rent'
-                                ? Colors.orange
-                                : Colors.green,
+                            color: widget.listingType == 'rent' ? Colors.orange : Colors.green,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            widget.listingType == 'rent'
-                                ? 'For Rent'
-                                : 'For Sale',
+                            widget.listingType == 'rent' ? 'For Rent' : 'For Sale',
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -174,10 +145,8 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildFeature(
-                            Icons.king_bed, "${widget.bedrooms} Beds"),
-                        _buildFeature(
-                            Icons.bathtub, "${widget.bathrooms} Baths"),
+                        _buildFeature(Icons.king_bed, "${widget.bedrooms} Beds"),
+                        _buildFeature(Icons.bathtub, "${widget.bathrooms} Baths"),
                         _buildFeature(Icons.square_foot, "${widget.area} m²"),
                       ],
                     ),
@@ -186,8 +155,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                       children: [
                         RatingBarIndicator(
                           rating: widget.rating,
-                          itemBuilder: (context, _) =>
-                              const Icon(Icons.star, color: Colors.amber),
+                          itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
                           itemCount: 5,
                           itemSize: 24.0,
                           direction: Axis.horizontal,
@@ -198,20 +166,11 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                       ],
                     ),
                     Gap(isHeight: true, isWidth: false, height: height * 0.03),
-                    Text("Description",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(fontWeight: FontWeight.w600)),
+                    Text("Description", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600)),
                     Gap(isHeight: true, isWidth: false, height: height * 0.01),
-                    Text(widget.description,
-                        style: Theme.of(context).textTheme.bodyMedium),
+                    Text(widget.description, style: Theme.of(context).textTheme.bodyMedium),
                     Gap(isHeight: true, isWidth: false, height: height * 0.04),
-                    Text("Seller Info",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(fontWeight: FontWeight.w600)),
+                    Text("Seller Info", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600)),
                     Gap(isHeight: true, isWidth: false, height: height * 0.01),
                     Text("Name: ${widget.sallerName}"),
                     Text("Phone: ${widget.sallerPhone}"),
@@ -220,27 +179,14 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.textPrimary,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                         ),
                         onPressed: () async {
                           final telUrl = "tel:${widget.sallerPhone}";
-                          if (await canLaunchUrl(Uri.parse(telUrl))) {
-                            await launchUrl(Uri.parse(telUrl));
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text("Could not initiate call")),
-                            );
-                          }
+                          await launchUrl(Uri.parse(telUrl));
                         },
-                        child: Text("Call Seller",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(color: AppColors.whiteColor)),
+                        child: Text("Call Seller", style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.whiteColor)),
                       ),
                     ),
                   ],
@@ -252,10 +198,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
       );
     } else {
       return BlocConsumer<EstateBloc, EstateState>(
-        buildWhen: (previous, current) =>
-            current is EstateOneFailure ||
-            current is EstateOneSuccess ||
-            current is EstateOneLoading,
+        buildWhen: (previous, current) => current is EstateOneFailure || current is EstateOneSuccess || current is EstateOneLoading,
         listener: (context, state) {},
         builder: (context, state) {
           if (state is EstateOneFailure) {
@@ -280,10 +223,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                 backgroundColor: AppColors.primaryColor,
                 title: Text(
                   "Property Details",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(color: AppColors.whiteColor),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(color: AppColors.whiteColor),
                 ),
                 iconTheme: const IconThemeData(color: AppColors.whiteColor),
                 actions: [
@@ -294,8 +234,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                           builder: (context) => isFavorite(widget.id)
                               ? AlertDialog(
                                   title: Text("Remove from favorite"),
-                                  content: Text(
-                                      "Are you sure you want to remove this property to your favorite list?"),
+                                  content: Text("Are you sure you want to remove this property to your favorite list?"),
                                   actions: [
                                       TextButton(
                                           child: Text("No"),
@@ -306,23 +245,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                           child: Text("Yes"),
                                           onPressed: () async {
                                             int index = 0;
-                                            for (index;
-                                                index <
-                                                    Constant
-                                                        .favoriteEstates.length;
-                                                index++) {
-                                              if (widget.id ==
-                                                  Constant.favoriteEstates[
-                                                      index]["id"]) {
-                                                Constant.favoriteEstates
-                                                    .removeAt(index);
+                                            for (index; index < Constant.favoriteEstates.length; index++) {
+                                              if (widget.id == Constant.favoriteEstates[index]["id"]) {
+                                                Constant.favoriteEstates.removeAt(index);
                                               }
                                             }
-                                            await Constant.preferences!
-                                                .setString(
-                                                    "favorites",
-                                                    jsonEncode(Constant
-                                                        .favoriteEstates));
+                                            await Constant.preferences!.setString("favorites", jsonEncode(Constant.favoriteEstates));
                                             if (context.mounted) {
                                               Navigator.of(context).pop();
                                             }
@@ -331,8 +259,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                     ])
                               : AlertDialog(
                                   title: Text("Add to favorite"),
-                                  content: Text(
-                                      "Are you sure you want to add this property to your favorite list?"),
+                                  content: Text("Are you sure you want to add this property to your favorite list?"),
                                   actions: [
                                       TextButton(
                                           child: Text("No"),
@@ -350,11 +277,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                               "image":
                                                   "https://media.istockphoto.com/id/1449364000/photo/minimalist-style-tiny-room.jpg?s=612x612&w=0&k=20&c=uokTOpJl8Hoc4HGqJPicYjy8SBMwCEWkGLUhhvJYgTA="
                                             });
-                                            await Constant.preferences!
-                                                .setString(
-                                                    "favorites",
-                                                    jsonEncode(Constant
-                                                        .favoriteEstates));
+                                            await Constant.preferences!.setString("favorites", jsonEncode(Constant.favoriteEstates));
                                             if (context.mounted) {
                                               Navigator.of(context).pop();
                                             }
@@ -362,9 +285,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                           })
                                     ]));
                     },
-                    icon: isFavorite(widget.id)
-                        ? const Icon(Icons.favorite)
-                        : const Icon(Icons.favorite_border),
+                    icon: isFavorite(widget.id) ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
                   ),
                 ],
               ),
@@ -378,87 +299,56 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                       width: width,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: widget.isNetwork
-                              ? NetworkImage(widget.imageUrl)
-                              : AssetImage(widget.imageUrl) as ImageProvider,
+                          image: widget.isNetwork ? NetworkImage(widget.imageUrl) : AssetImage(widget.imageUrl) as ImageProvider,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(state.estate.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(fontWeight: FontWeight.bold)),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.01),
+                          Text(state.estate.title, style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold)),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.01),
                           Row(
                             children: [
-                              const Icon(Icons.location_on,
-                                  size: 18, color: Colors.grey),
+                              const Icon(Icons.location_on, size: 18, color: Colors.grey),
                               const SizedBox(width: 4),
                               Expanded(
-                                child: Text(state.estate.address,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(color: Colors.grey[600])),
+                                child: Text(state.estate.address, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey[600])),
                               ),
                               IconButton(
-                                icon: const Icon(Icons.map,
-                                    color: AppColors.primaryColor),
+                                icon: const Icon(Icons.map, color: AppColors.primaryColor),
                                 onPressed: () async {
-                                  final encodedLocation =
-                                      Uri.encodeComponent(widget.location);
-                                  final mapUrl =
-                                      'https://www.google.com/maps/search/?api=1&query=$encodedLocation';
+                                  final encodedLocation = Uri.encodeComponent(widget.location);
+                                  final mapUrl = 'https://www.google.com/maps/search/?api=1&query=$encodedLocation';
                                   if (await canLaunchUrl(Uri.parse(mapUrl))) {
                                     await launchUrl(Uri.parse(mapUrl));
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text("Could not open map")),
+                                      const SnackBar(content: Text("Could not open map")),
                                     );
                                   }
                                 },
                               )
                             ],
                           ),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.015),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.015),
                           Row(
                             children: [
                               Text("\$${state.estate.price}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(
-                                          color: AppColors.primaryColor,
-                                          fontWeight: FontWeight.bold)),
+                                  style:
+                                      Theme.of(context).textTheme.titleLarge!.copyWith(color: AppColors.primaryColor, fontWeight: FontWeight.bold)),
                               const SizedBox(width: 12),
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: widget.listingType == 'rent'
-                                      ? Colors.orange
-                                      : Colors.green,
+                                  color: widget.listingType == 'rent' ? Colors.orange : Colors.green,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  widget.listingType == 'rent'
-                                      ? 'For Rent'
-                                      : 'For Sale',
+                                  widget.listingType == 'rent' ? 'For Rent' : 'For Sale',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -467,31 +357,21 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                               )
                             ],
                           ),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.02),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.02),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              _buildFeature(
-                                  Icons.king_bed, "${widget.bedrooms} Beds"),
-                              _buildFeature(
-                                  Icons.bathtub, "${widget.bathrooms} Baths"),
-                              _buildFeature(
-                                  Icons.square_foot, "${widget.area} m²"),
+                              _buildFeature(Icons.king_bed, "${widget.bedrooms} Beds"),
+                              _buildFeature(Icons.bathtub, "${widget.bathrooms} Baths"),
+                              _buildFeature(Icons.square_foot, "${widget.area} m²"),
                             ],
                           ),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.02),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.02),
                           Row(
                             children: [
                               RatingBarIndicator(
                                 rating: state.estate.rateAvg.toDouble(),
-                                itemBuilder: (context, _) =>
-                                    const Icon(Icons.star, color: Colors.amber),
+                                itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
                                 itemCount: 5,
                                 itemSize: 24.0,
                                 direction: Axis.horizontal,
@@ -506,20 +386,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                     bool isLoading = false;
                                     await showDialog(
                                         context: context,
-                                        builder: (_) => StatefulBuilder(
-                                                builder: (context, setState) {
+                                        builder: (_) => StatefulBuilder(builder: (context, setState) {
                                               return AlertDialog(
-                                                  title:
-                                                      Text("Rate this estate"),
+                                                  title: Text("Rate this estate"),
                                                   content: RatingBar.builder(
-                                                    itemPadding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal: 4.0),
-                                                    itemBuilder: (context, _) =>
-                                                        const Icon(Icons.star,
-                                                            color:
-                                                                Colors.amber),
+                                                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                                    itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
                                                     onRatingUpdate: (rating) {
                                                       setState(() {
                                                         rate = rating;
@@ -527,17 +399,12 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                                     },
                                                   ),
                                                   actions: [
-                                                    if (isLoading)
-                                                      Center(
-                                                          child:
-                                                              CircularProgressIndicator()),
+                                                    if (isLoading) Center(child: CircularProgressIndicator()),
                                                     if (!isLoading)
                                                       TextButton(
                                                           child: Text("No"),
                                                           onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
+                                                            Navigator.of(context).pop();
                                                           }),
                                                     if (!isLoading)
                                                       TextButton(
@@ -546,20 +413,10 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                                             setState(() {
                                                               isLoading = true;
                                                             });
-                                                            await rateEstate(
-                                                                widget.id,
-                                                                rate.toInt());
-                                                            if (context
-                                                                .mounted) {
-                                                              context
-                                                                  .read<
-                                                                      EstateBloc>()
-                                                                  .add(GetOneEstate(
-                                                                      id: widget
-                                                                          .id));
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
+                                                            await rateEstate(widget.id, rate.toInt());
+                                                            if (context.mounted) {
+                                                              context.read<EstateBloc>().add(GetOneEstate(id: widget.id));
+                                                              Navigator.of(context).pop();
                                                             }
                                                           }),
                                                   ]);
@@ -567,48 +424,19 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                   })
                             ],
                           ),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.03),
-                          Text("Description",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(fontWeight: FontWeight.w600)),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.01),
-                          Text(state.estate.description,
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.04),
-                          Text("Seller Info",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(fontWeight: FontWeight.w600)),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.01),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.03),
+                          Text("Description", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600)),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.01),
+                          Text(state.estate.description, style: Theme.of(context).textTheme.bodyMedium),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.04),
+                          Text("Seller Info", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600)),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.01),
                           Text("Name: ${state.estate.username}"),
                           Text("Phone: ${state.estate.phone}"),
-                          Gap(
-                              isHeight: true,
-                              isWidth: false,
-                              height: height * 0.02),
-                          Text("Services",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          Gap(isHeight: true, isWidth: false, height: height * 0.02),
+                          Text("Services", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                           context.read<EstateBloc>().services.isEmpty
-                              ? Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 20),
-                                  child: Center(
-                                      child: Text("There is no service")))
+                              ? Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Center(child: Text("There is no service")))
                               : Column(
                                   children: context
                                       .read<EstateBloc>()
@@ -617,59 +445,33 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                           elevation: 3,
                                           color: Color(0xFFFFFFFF),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16, vertical: 5),
+                                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
+                                              crossAxisAlignment: CrossAxisAlignment.end,
                                               children: [
                                                 Row(children: [
                                                   CircleAvatar(
-                                                      foregroundImage: NetworkImage(
-                                                          "https://static.thenounproject.com/png/1389879-200.png"),
+                                                      foregroundImage: NetworkImage("https://static.thenounproject.com/png/1389879-200.png"),
                                                       radius: 20),
                                                   SizedBox(width: 20),
                                                   Expanded(
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                              "Service: ${service.name}",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize:
-                                                                      18)),
-                                                          Text(
-                                                              "Price: \$${service.price}",
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      16)),
-                                                        ]),
+                                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                                      Text("Service: ${service.name}", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+                                                      Text("Price: \$${service.price}", style: TextStyle(fontSize: 16)),
+                                                    ]),
                                                   ),
                                                   TextButton(
                                                       onPressed: () async {
                                                         bool isLoading = false;
                                                         await showDialog(
                                                             context: context,
-                                                            builder: (_) =>
-                                                                StatefulBuilder(
-                                                                    builder:
-                                                                        (context,
-                                                                            setState) {
+                                                            builder: (_) => StatefulBuilder(builder: (context, setState) {
                                                                   return AlertDialog(
-                                                                      title: Text(
-                                                                          "Buy ${service.name} service"),
-                                                                      content: Text(
-                                                                          "Are you sure to buy this service"),
+                                                                      title: Text("Buy ${service.name} service"),
+                                                                      content: Text("Are you sure to buy this service"),
                                                                       actions: [
-                                                                        if (isLoading)
-                                                                          Center(
-                                                                              child: CircularProgressIndicator()),
+                                                                        if (isLoading) Center(child: CircularProgressIndicator()),
                                                                         if (!isLoading)
                                                                           TextButton(
                                                                               child: Text("Cancel"),
@@ -701,115 +503,80 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.textPrimary,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40, vertical: 14),
-                                ),
-                                onPressed: () async {
-                                  final telUrl = "tel:${widget.sallerPhone}";
-                                  if (await canLaunchUrl(Uri.parse(telUrl))) {
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.textPrimary,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                                  ),
+                                  onPressed: () async {
+                                    final telUrl = "tel:${widget.sallerPhone}";
                                     await launchUrl(Uri.parse(telUrl));
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content:
-                                              Text("Could not initiate call")),
-                                    );
-                                  }
-                                },
-                                child: Text("Call Seller",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(color: AppColors.whiteColor)),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.textPrimary,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40, vertical: 14),
+                                  },
+                                  child: Text("Call Seller", style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.whiteColor)),
                                 ),
-                                onPressed: () async {
-                                  bool isLoading = false;
-                                  String comment = "";
-                                  await showDialog(
-                                      context: context,
-                                      builder: (_) => StatefulBuilder(
-                                              builder: (context, setState) {
-                                            return AlertDialog(
-                                                title: Text(
-                                                    "Comment on this estate"),
-                                                content: TextField(
-                                                  maxLines: null,
-                                                  decoration: InputDecoration(
-                                                    hintText: "write a comment",
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.textPrimary,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                                  ),
+                                  onPressed: () async {
+                                    bool isLoading = false;
+                                    String comment = "";
+                                    await showDialog(
+                                        context: context,
+                                        builder: (_) => StatefulBuilder(builder: (context, setState) {
+                                              return AlertDialog(
+                                                  title: Text("Comment on this estate"),
+                                                  content: TextField(
+                                                    maxLines: null,
+                                                    decoration: InputDecoration(
+                                                      hintText: "write a comment",
+                                                    ),
+                                                    onChanged: (value) {
+                                                      comment = value;
+                                                    },
                                                   ),
-                                                  onChanged: (value) {
-                                                    comment = value;
-                                                  },
-                                                ),
-                                                actions: [
-                                                  if (isLoading)
-                                                    Center(
-                                                        child:
-                                                            CircularProgressIndicator()),
-                                                  if (!isLoading)
-                                                    TextButton(
-                                                        child: Text("Cancel"),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        }),
-                                                  if (!isLoading)
-                                                    TextButton(
-                                                        child: Text("Send"),
-                                                        onPressed: () async {
-                                                          if (comment == "")
-                                                            return;
-                                                          setState(() {
-                                                            isLoading = true;
-                                                          });
-                                                          await commentEstate(
-                                                              widget.id,
-                                                              null,
-                                                              comment);
-                                                          if (context.mounted) {
-                                                            context
-                                                                .read<
-                                                                    EstateBloc>()
-                                                                .add(GetOneEstate(
-                                                                    id: widget
-                                                                        .id));
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          }
-                                                        }),
-                                                ]);
-                                          }));
-                                },
-                                child: Text("Add Comment",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(color: AppColors.whiteColor)),
+                                                  actions: [
+                                                    if (isLoading) Center(child: CircularProgressIndicator()),
+                                                    if (!isLoading)
+                                                      TextButton(
+                                                          child: Text("Cancel"),
+                                                          onPressed: () {
+                                                            Navigator.of(context).pop();
+                                                          }),
+                                                    if (!isLoading)
+                                                      TextButton(
+                                                          child: Text("Send"),
+                                                          onPressed: () async {
+                                                            if (comment == "") return;
+                                                            setState(() {
+                                                              isLoading = true;
+                                                            });
+                                                            await commentEstate(widget.id, null, comment);
+                                                            if (context.mounted) {
+                                                              context.read<EstateBloc>().add(GetOneEstate(id: widget.id));
+                                                              Navigator.of(context).pop();
+                                                            }
+                                                          }),
+                                                  ]);
+                                            }));
+                                  },
+                                  child: Text("Add Comment", style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.whiteColor)),
+                                ),
                               )
                             ],
                           ),
-                          Text("Comments",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text("Comments", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                           state.estate.comments.isEmpty
-                              ? Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 20),
-                                  child: Center(
-                                      child: Text("There is no comment")))
+                              ? Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Center(child: Text("There is no comment")))
                               : Column(
                                   children: state.estate.comments
                                       .map((comment) => CommentCard(
@@ -849,10 +616,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
 
 Future<void> rateEstate(int id, int rating) async {
   var headers = {'Authorization': Constant.token!};
-  http.Response response = await http.post(
-      Uri.parse('${Constant.baseUrl}/estate/rate/$id'),
-      body: {'rate': rating.toString()},
-      headers: headers);
+  http.Response response = await http.post(Uri.parse('${Constant.baseUrl}/estate/rate/$id'), body: {'rate': rating.toString()}, headers: headers);
   print(response.statusCode);
   if (response.statusCode == 200 || response.statusCode == 201) {
     Fluttertoast.showToast(msg: "Rated successfully");
@@ -870,18 +634,11 @@ bool isFavorite(int id) {
 }
 
 Future<void> buyService(int estateId, int serviceId) async {
-  var headers = {
-    'Authorization': Constant.token!,
-    "Content-Type": "application/json"
-  };
-  http.Response response = await http.post(
-      Uri.parse('${Constant.baseUrl}/payment'),
-      body: jsonEncode({"service_id": serviceId, "estate_id": estateId}),
-      headers: headers);
+  var headers = {'Authorization': Constant.token!, "Content-Type": "application/json"};
+  http.Response response =
+      await http.post(Uri.parse('${Constant.baseUrl}/payment'), body: jsonEncode({"service_id": serviceId, "estate_id": estateId}), headers: headers);
   print(response.statusCode);
-  if (response.statusCode == 200 ||
-      response.statusCode == 201 ||
-      response.statusCode == 204) {
+  if (response.statusCode == 200 || response.statusCode == 201 || response.statusCode == 204) {
     Fluttertoast.showToast(msg: "Buy successfully");
   } else if (response.statusCode == 402) {
     Fluttertoast.showToast(msg: jsonDecode(response.body)["error"]);

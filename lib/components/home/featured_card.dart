@@ -63,32 +63,34 @@ class FeaturedCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20)),
         child: Row(
           children: [
-            Container(
-                height: double.infinity,
-                width: 134,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: AssetImage(path), fit: BoxFit.cover)),
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: const EdgeInsets.all(15),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                            color: AppColors.textPrimary,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Text(
-                          category,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: AppColors.whiteColor),
+            Expanded(
+              child: Container(
+                  height: double.infinity,
+                  width: 134,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: AssetImage(path), fit: BoxFit.cover)),
+                  child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                              color: AppColors.textPrimary,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                            category,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: AppColors.whiteColor),
+                          ),
                         ),
-                      ),
-                    ))),
+                      ))),
+            ),
             Gap(isWidth: true, isHeight: false, width: width * 0.02),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
