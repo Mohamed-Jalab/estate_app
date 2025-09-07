@@ -135,24 +135,79 @@ class _AddEstateState extends State<AddEstate> {
                 ),
                 SizedBox(height: 10),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: TextField(
-                          decoration:
-                              InputDecoration(labelText: "Listing Type"),
-                          controller: TextEditingController(text: listingType),
-                          onChanged: (value) {
-                            listingType = value;
-                          }),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        Text("Listing Type", style: TextStyle(fontSize: 18)),
+                        RadioListTile(
+                            value: "rent",
+                            title: Text("Rent"),
+                            groupValue: listingType,
+                            onChanged: (value) {
+                              listingType = value;
+                              setState(() {});
+                            }),
+                        SizedBox(height: 2),
+                        RadioListTile(
+                            value: "sale",
+                            title: Text("Sale"),
+                            groupValue: listingType,
+                            onChanged: (value) {
+                              listingType = value;
+                              setState(() {});
+                            }),
+                      ]),
                     ),
                     SizedBox(width: 20),
                     Expanded(
-                      child: TextField(
-                          decoration: InputDecoration(labelText: "Estate Type"),
-                          controller: TextEditingController(text: estateType),
-                          onChanged: (value) {
-                            estateType = value;
-                          }),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        Text("Listing Type", style: TextStyle(fontSize: 18)),
+                        RadioListTile(
+                            value: "land",
+                            title: Text("Land"),
+                            groupValue: estateType,
+                            onChanged: (value) {
+                              estateType = value;
+                              setState(() {});
+                            }),
+                        SizedBox(height: 2),
+                        RadioListTile(
+                            value: "villa",
+                            title: Text("Villa"),
+                            groupValue: estateType,
+                            onChanged: (value) {
+                              estateType = value;
+                              setState(() {});
+                            }),
+                        SizedBox(height: 2),
+                        RadioListTile(
+                            value: "house",
+                            title: Text("House"),
+                            groupValue: estateType,
+                            onChanged: (value) {
+                              estateType = value;
+                              setState(() {});
+                            }),
+                        SizedBox(height: 2),
+                        RadioListTile(
+                            value: "flat",
+                            title: Text("Flat"),
+                            groupValue: estateType,
+                            onChanged: (value) {
+                              estateType = value;
+                              setState(() {});
+                            }),
+                        SizedBox(height: 2),
+                        RadioListTile(
+                            value: "other",
+                            title: Text("Other"),
+                            groupValue: estateType,
+                            onChanged: (value) {
+                              estateType = value;
+                              setState(() {});
+                            }),
+                      ]),
                     ),
                   ],
                 ),
@@ -236,7 +291,8 @@ class _AddEstateState extends State<AddEstate> {
       isLoading = true;
     });
     http.MultipartRequest request =
-        http.MultipartRequest('POST', Uri.parse('${Constant.baseUrl}/estate'))..followRedirects = false;
+        http.MultipartRequest('POST', Uri.parse('${Constant.baseUrl}/estate'))
+          ..followRedirects = false;
 
     request.headers['Authorization'] = 'Bearer ${Constant.token!}';
     request.headers['Content-Type'] = 'application/json';
