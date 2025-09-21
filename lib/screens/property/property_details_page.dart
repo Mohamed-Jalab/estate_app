@@ -511,7 +511,7 @@ class _PropertyDetailsPageState extends State<PropertyDetailsPage> {
                                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                                   ),
                                   onPressed: () async {
-                                    final telUrl = "tel:${widget.sallerPhone}";
+                                    final telUrl = "tel:${state.estate.phone}";
                                     await launchUrl(Uri.parse(telUrl));
                                   },
                                   child: Text("Call Seller", style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.whiteColor)),

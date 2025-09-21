@@ -12,8 +12,9 @@ import 'add_estate.dart';
 import 'property/property_details_page.dart';
 
 class MyEstates extends StatefulWidget {
-  const MyEstates({super.key, required this.estates});
+  const MyEstates({super.key, required this.estates, required this.myPending});
   final List<EstateModel> estates;
+  final List<EstateModel> myPending;
 
   @override
   State<MyEstates> createState() => _MyEstatesState();
@@ -40,8 +41,9 @@ class _MyEstatesState extends State<MyEstates> {
                 : isLoading
                     ? Center(child: CircularProgressIndicator())
                     : ListView.builder(
-                        itemCount: widget.estates.length,
-                        itemBuilder: (context, index) => Padding(
+                        itemCount:
+                            widget.estates.length + widget.estates.length,
+                        itemBuilder: (context, index) =>index< widget.estates.length-1?  Padding(
                               padding: const EdgeInsets.only(bottom: 12.0),
                               child: PropertyMyCard(
                                 estateType: widget.estates[index].estateType,

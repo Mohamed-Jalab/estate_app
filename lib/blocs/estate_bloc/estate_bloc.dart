@@ -14,6 +14,7 @@ part 'estate_state.dart';
 class EstateBloc extends Bloc<EstateEvent, EstateState> {
   List<EstateModel> estates = [];
   List<ServiceModel> services = [];
+  List<EstateModel> myPending = [];
   num maxPrice = 100000;
   num minPrice = 100;
   num maxArea = 100;
@@ -32,6 +33,7 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
         if (res2.statusCode == 200) {
           List body = jsonDecode(res2.body)["data"];
           services = [];
+
           for (final json in body) services.add(ServiceModel.fromJson(json));
         } else {
           throw "";
@@ -42,8 +44,16 @@ class EstateBloc extends Bloc<EstateEvent, EstateState> {
         print(res.statusCode);
         if (res.statusCode == 200) {
           estates = [];
+          myPending = [];
           List body = jsonDecode(res.body)["data"];
           for (final json in body) {
+            if (json["status"] != "accepted") {
+              if (json["user_Id"] == Constant.user!.id) {
+                myPending.add(EstateModel.fromJson(json));
+              }
+              continue;
+            }
+            ;
             // maxPrice = max(maxPrice, json["price"]);
             // minPrice = min(minPrice, json["price"]);
             maxArea = max(maxArea, json["area"]);
