@@ -52,9 +52,13 @@ flutter run
 
 This project is part of my journey as a Flutter developer. It helps me practice mobile application development, improve my UI implementation skills, and gain hands-on experience with Flutter and Dart.
 
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
 ## 👨‍💻 Author
 
-**Mohamed Jalab**
+**Mohammed Deeb Jalab**
 
 - GitHub: [Mohamed-Jalab](https://github.com/Mohamed-Jalab)
 
